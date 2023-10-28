@@ -13,3 +13,12 @@ class Rotor():
         signal = self.left[index]
         ind = self.wiring.find(signal)
         return ind
+
+    def rotate(self,rotateTo=""):
+        if rotateTo=="":
+            self.left = self.left[1:] + self.left[0]
+            self.wiring = self.wiring[1:] + self.wiring[0]
+        else:
+            indx = self.left.find(rotateTo)
+            self.left = self.left[indx:] + self.left[:indx]
+            self.wiring = self.wiring[indx:] + self.wiring[:indx]

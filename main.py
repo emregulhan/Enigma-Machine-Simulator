@@ -4,9 +4,10 @@ from SubstitutionCypher import SubstitutionCypher
 from Keyboard import Keyboard
 from Plugboard import Plugboard
 from Rotor import Rotor
+from Enigma import Enigma
 
 # (mode,filename,key) = (sys.argv[0],sys.argv[1],sys.argv[2])
-
+word = input("Kelime giriniz: ")
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 reflectorA = Reflector(ALPHABET,"EJMZALYXVBWFCRQUONTSPIKHGD")
@@ -21,25 +22,63 @@ rotor_IV = Rotor(ALPHABET,"ESOVPZJAYQUIRHXLNFTGKDCMWB","J")
 rotor_V = Rotor(ALPHABET,"VZBRGITYUPSDNHLXAWMJQOFECK ","Z")
 rotors = {"I":rotor_I,"II":rotor_II,"III":rotor_III,"IV":rotor_IV,"V":rotor_V}
 
+rotorsList = ["I","II","III"]
+
+keyboard = Keyboard(ALPHABET)
+plugboard = Plugboard(ALPHABET)
+reflector = reflectorB #IT IS A PARAMETER
+keySettings = "AAA"
+subs = "AR GK OX"
+enigma = Enigma(keyboard,plugboard,rotors,rotorsList,reflector,keySettings,ALPHABET,subs)
+enigma.encrypt(word)
+print("This is the ENIGMA")
+
+
+keySettings = "AAA"
+for a,b in enumerate(keySettings):
+    rotors[rotorsList[a]].rotate(b)
+
+
+print("DENEMELERRRR")
+
 
 keyboard = Keyboard(ALPHABET)
 plugboard = Plugboard(ALPHABET)
 plugboard.substitution("AR GK OX")
-index = keyboard.forward("A")
-index = plugboard.forward(index)
-index = rotors["III"].forward(index)
-index = rotors["II"].forward(index)
-index = rotors["I"].forward(index)
-index = reflectorA.reflect(index)
-index = rotors["I"].backward(index)
-index = rotors["II"].backward(index)
-index = rotors["III"].backward(index)
-index = plugboard.backward(index)
 
-print(keyboard.backward(index))
+encrpyted = ""
+"""for a in word:
+    if a not in ALPHABET:
+        encrpyted += a
+        continue
+
+    if rotor_III.left[0] == rotor_III.notch and rotor_II.left[0] == rotor_II.notch:
+        rotor_III.rotate()
+        rotor_II.rotate()
+        rotor_I.rotate()
+    elif rotor_III.left[0] == rotor_III.notch:
+        rotor_III.rotate()
+        rotor_II.rotate()
+    else:
+        rotor_III.rotate()
+
+    index = keyboard.forward(a)
+    index = plugboard.forward(index)
+    index = rotors["III"].forward(index)
+    index = rotors["II"].forward(index)
+    index = rotors["I"].forward(index)
+    index = reflectorB.reflect(index)
+    index = rotors["I"].backward(index)
+    index = rotors["II"].backward(index)
+    index = rotors["III"].backward(index)
+    index = plugboard.backward(index)
+
+    print("**********")
+    print(keyboard.backward(index))
+    encrpyted += keyboard.backward(index)
 
 
-
+print(encrpyted)"""
 
 """with open('raw_text_file.txt') as f:
     lines = f.readlines()
