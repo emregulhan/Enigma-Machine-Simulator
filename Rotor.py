@@ -22,3 +22,14 @@ class Rotor():
             indx = self.left.find(rotateTo)
             self.left = self.left[indx:] + self.left[:indx]
             self.wiring = self.wiring[indx:] + self.wiring[:indx]
+    def setRingSetting(self,n,alphabet):
+        if n==1:
+            return
+        else:
+            shf = n-1
+            #Shifting alphabet, cipher backwards
+            self.left = self.left[-1 * shf:] + self.left[:-1*shf]
+            self.wiring = self.wiring[-1 * shf:] + self.wiring[:-1*shf]
+            #Shifting the notch point
+            notchIndex = alphabet.find(self.notch)
+            self.notch = alphabet[(notchIndex-n+1) % 26]

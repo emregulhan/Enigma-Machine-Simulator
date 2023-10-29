@@ -8,13 +8,17 @@ from Enigma import Enigma
 
 # (mode,filename,key) = (sys.argv[0],sys.argv[1],sys.argv[2])
 word = input("Kelime giriniz: ")
+
+#ALPHABET
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+#Reflectors
 reflectorA = Reflector(ALPHABET,"EJMZALYXVBWFCRQUONTSPIKHGD")
 reflectorB = Reflector(ALPHABET,"YRUHQSLDPXNGOKMIEBFZCWVJAT")
 reflectorC = Reflector(ALPHABET,"FVPJIAOYEDRZXWGCTKUQSBNMHL")
 reflectors = {"A":reflectorA,"B":reflectorB,"C":reflectorC}
 
+#Rotors
 rotor_I = Rotor(ALPHABET,"EKMFLGDQVZNTOWYHXUSPAIBRCJ","Q")
 rotor_II = Rotor(ALPHABET,"AJDKSIRUXBLHWTMCQGZNPYFVOE","E")
 rotor_III = Rotor(ALPHABET,"BDFHJLCPRTXVZNYEIWGAKMUSQO","V")
@@ -22,15 +26,28 @@ rotor_IV = Rotor(ALPHABET,"ESOVPZJAYQUIRHXLNFTGKDCMWB","J")
 rotor_V = Rotor(ALPHABET,"VZBRGITYUPSDNHLXAWMJQOFECK ","Z")
 rotors = {"I":rotor_I,"II":rotor_II,"III":rotor_III,"IV":rotor_IV,"V":rotor_V}
 
-rotorsList = ["I","II","III"]
+#Choosing which rotors will be used
+rotorsList = ["IV","II","I"]
 
+#Keyboard and plugboard
 keyboard = Keyboard(ALPHABET)
 plugboard = Plugboard(ALPHABET)
-reflector = reflectorB #IT IS A PARAMETER
-keySettings = "AAA"
-subs = "AR GK OX"
-enigma = Enigma(keyboard,plugboard,rotors,rotorsList,reflector,keySettings,ALPHABET,subs)
+
+#Choosing which reflector will be used
+reflector = reflectorB
+
+#Starting settings of Rotors.
+keySettings = "CAT"
+
+#Setting the ring settings.
+ringSettings = [5,26,2]
+#Substitions
+subs = "AB CD EF"
+
+#Creating our enigma machine and encrypting a string with that enigma machine.
+enigma = Enigma(keyboard,plugboard,rotors,rotorsList,reflector,keySettings,ALPHABET,subs,ringSettings)
 enigma.encrypt(word)
+
 print("This is the ENIGMA")
 
 

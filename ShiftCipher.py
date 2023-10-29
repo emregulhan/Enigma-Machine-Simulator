@@ -26,3 +26,8 @@ class ShiftCipher():
             decrypted += self.encrypt_char(alphabet=cipher, cipher=alphabet , letter=a) #Switching alphabet and cipher parameters to decrypt the string.
 
         return decrypted
+
+
+if __name__ == "__main__":
+    ShiftCipher("ABC")
+    print("qwe")

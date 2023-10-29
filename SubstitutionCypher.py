@@ -11,4 +11,3 @@ class SubstitutionCypher():
             cipher = cipher[:index_2] + a[0] + cipher[index_2+1:]
         return cipher
 
-##
