@@ -1,3 +1,9 @@
+import sys
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+def readFile(filename):
+    with open(filename) as f:
+        return f.readlines()
+
 
 class ShiftCipher():
 
@@ -18,7 +24,6 @@ class ShiftCipher():
         encrypted = ""
         for a in str:
             encrypted += self.encrypt_char(alphabet=alphabet , cipher=cipher , letter=a)
-
         return encrypted
     def decrypt_str(self,alphabet,cipher,s):
         decrypted = ""
@@ -29,5 +34,13 @@ class ShiftCipher():
 
 
 if __name__ == "__main__":
-    ShiftCipher("ABC")
-    print("qwe")
+    (process, inp , shiftAmount) = (sys.argv[1],readFile(sys.argv[2]),sys.argv[3])
+    shiftCipher = ShiftCipher(ALPHABET)
+    cipher = shiftCipher.compute_cipher(int(shiftAmount))
+    inp = "".join(inp)
+    if(process == "encrypt"):
+        print(shiftCipher.encrypt_str(ALPHABET,cipher,inp))
+    if(process=="decrypt"):
+        print(shiftCipher.decrypt_str(ALPHABET,cipher,inp))
+
+

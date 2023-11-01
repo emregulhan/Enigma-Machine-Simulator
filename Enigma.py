@@ -46,7 +46,6 @@ class Enigma:
                 r2.rotate()
             else:
                 r3.rotate()
-
             index = self.keyboard.forward(a)
             index = self.plug.forward(index)
             index = r3.forward(index)
@@ -57,11 +56,9 @@ class Enigma:
             index = r2.backward(index)
             index = r3.backward(index)
             index = self.plug.backward(index)
-            print(self.keyboard.backward(index))
             if capitalized == False:
                 encrypted += self.keyboard.backward(index).lower()
             else:
                 encrypted += self.keyboard.backward(index)
 
-
-        print(encrypted)
+        return encrypted
